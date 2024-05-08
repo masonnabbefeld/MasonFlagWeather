@@ -1,0 +1,40 @@
+---
+title: "WeatherGraphs"
+author: "Mason Nabbefeld"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(tidyverse)
+library(MasonFlagWeather)
+```
+
+The first graph is showing the days that Flagstaff received more than one foot of snow in a day.
+```{r}
+my.weather.snow <- Flagstaff_Weather %>% filter(SNOW>=12)
+ggplot(my.weather.snow,
+       aes(DATE,SNOW))+
+  geom_point(color = "skyblue")+
+  theme_classic()
+```
+
+The next graph shows the days that the max temperature in Flagstaff was higher that 90 degrees.
+```{r}
+my.weather.hot <- Flagstaff_Weather %>% filter(TMAX>90)
+ggplot(my.weather.hot,
+       aes(DATE,TMAX))+
+  geom_point(color = "darkorange")+
+  theme_classic()
+```
+
+This next graph shows the max temperatures from 2000-2020.
+```{r}
+my.weather.00to20 <- Flagstaff_Weather %>% filter(DATE <= "2020-01-01") %>% filter(DATE >= "2000-01-01")
+ggplot(my.weather.80to10,
+       aes(DATE,TMAX))+
+  geom_line(color = "darkgreen")
+```
+
